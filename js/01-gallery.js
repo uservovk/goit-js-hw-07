@@ -29,7 +29,7 @@ function createGalleryMarkup(galleryItems) {
 };
 
 function onGalleryContainerClick(event) {
-    blockDefaultAction(event);
+    removeDefaultAction(event);
     
     if (event.target.nodeName !== 'IMG') {
         return;
@@ -43,12 +43,12 @@ function onGalleryContainerClick(event) {
 
     galleryContainer.addEventListener('keydown',
         (event) => {
-            if (event.code === 'Escape') {
+            if (event.code === 'ESCAPE') {
                 instance.close();
             };
         });
 };
 
-function blockDefaultAction(event) {
+function removeDefaultAction(event) {
     event.preventDefault();
 };

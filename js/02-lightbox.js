@@ -3,9 +3,6 @@ import { galleryItems } from './gallery-items.js';
 const galleryContainer = document.querySelector('.gallery');
 const galleryMarkup = createGalleryMarkup(galleryItems);
 
-galleryContainer.addEventListener('click',
-    onGalleryContainerClick);
-
 galleryContainer.insertAdjacentHTML('beforeend',
     galleryMarkup);
 
@@ -23,14 +20,4 @@ function createGalleryMarkup(galleryItems) {
     ).join('');
 };
 
-function onGalleryContainerClick(event) {
-    blockDefaultAction(event);
-    
-    if (event.target.nodeName !== 'IMG') {
-        return;
-    };
-};
-
-function blockDefaultAction(event) {
-    event.preventDefault();
-};
+const gallery = new SimpleLightbox('ul.gallery a');
