@@ -3,9 +3,11 @@ import { galleryItems } from './gallery-items.js';
 const galleryContainer = document.querySelector('.gallery');
 const galleryMarkup = createGalleryMarkup(galleryItems);
 
-galleryContainer.addEventListener('click',onGalleryContainerClick);
+galleryContainer.addEventListener('click',
+    onGalleryContainerClick);
 
-galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+galleryContainer.insertAdjacentHTML('beforeend',
+    galleryMarkup);
 
 function createGalleryMarkup(galleryItems) {
     return galleryItems
@@ -27,7 +29,26 @@ function createGalleryMarkup(galleryItems) {
 };
 
 function onGalleryContainerClick(event) {
+    blockDefaultAction(event);
+    
     if (event.target.nodeName !== 'IMG') {
         return;
     };
+
+    const instance = basicLightbox.create(`
+        <img src="${event.target.dataset.source}" 
+        width="800" height="600">
+    `);
+    instance.show();
+
+    galleryContainer.addEventListener('keydown',
+        (event) => {
+            if (event.code === 'Escape') {
+                instance.close();
+            };
+        });
+};
+
+function blockDefaultAction(event) {
+    event.preventDefault();
 };
