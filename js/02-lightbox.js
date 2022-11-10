@@ -20,4 +20,5 @@ function createGalleryMarkup(galleryItems) {
     ).join('');
 };
 
-const gallery = new SimpleLightbox('ul.gallery a');
+const myGallery = new SimpleLightbox('ul.gallery a',
+    { captionsData: 'alt', captionDelay: 250 });
